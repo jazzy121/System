@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>登录页面</title>
-    <link rel="shortcut icon" href="./images/wallpaper2.png">
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="shortcut icon" href="../images/wallpaper2.png">
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 
 <body>
@@ -28,14 +28,14 @@
                                 <a href="/signup">点击注册</a>
                             </span>
                 </header>
-                <form th:object="${userForm}" class="session-register_form"
+                <form ="session-register_form"
                       action="/login" accept-charset="UTF-8" id="new_user"
                       method="POST">
                     <div class="parent" id="phone">
-                        <input th:field="*{mobile}" type="text" id="mobile" name="mobile" placeholder="手机号" onblur="checkMobile()" required>
+                        <input  type="text" id="mobile" name="mobile" placeholder="手机号" onblur="checkMobile()" required>
                     </div>
                     <div class="parent pwd" >
-                        <input th:field="*{pwd}" class="user_pwd" id="rg-user_pwd" name="pwd" placeholder="密码" required
+                        <input  class="user_pwd" id="rg-user_pwd" name="pwd" placeholder="密码" required
                                onblur="checkPwd()" type="password">
                     </div>
                     <div class="parent remember">
@@ -43,26 +43,11 @@
                         <span>记住我</span>
                     </div>
                     <button id="btn-submit" class="sub-register" type="submit">立即登录</button>
-                    <a class="forget" href="#">已有账号，忘记密码？</a>
-                    <div class="osChina">
-                        <span><img src="./images/oschina.png" class="clearFix"/><span class="oschina-word">使用OSChina账号登录</span></span>
-                    </div>
-                    <div class="cutLine clearFix">
-                        <div></div><div class="noline">  其他方式登录</div><div></div>
-                    </div>
-                    <div class="other clearFix">
-                        <li><a href="#"><img src="./images/wechat.png"/></a></li>
-                        <li><a href="#"><img src="./images/qq.png"/></a></li>
-                        <li><a href="#"><img src="./images/github.png"/></a></li>
-                        <li><a href="#"><img src="./images/weibo.png"/></a></li>
-                        <li><a href="#"><img src="./images/dingding.png"/></a></li>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="session_footer">
-
     </div>
 </div>
 </body>
