@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-    <properties resource="db.properties">
-    </properties>
-    <!--    配置开发环境  可以多个environment连接多个数据库-->
-    <environments default="development">
-        <!-- 加载数据库属性文件 -->
-        <environment id="development">
-            <!--            事务管理设置为jdbc管理-->
-            <transactionManager type="JDBC"/>
-            <!--            配置数据源-->
-            <dataSource type="POOLED">
-                <property name="driver" value="${driver}"/>
-                <property name="url" value="${url}"/>
-                <property name="username" value="${username}"/>
-                <property name="password" value="${password}"/>
-            </dataSource>
-        </environment>
-    </environments>
-    <mappers>
-        <mapper resource="mapper/UserMapper.xml"/>
-        <mapper resource="mapper/Course.xml"/>
-    </mappers>
-</configuration>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE configuration-->
+<!--        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-config.dtd">-->
+<!--<configuration>-->
+<!--    <properties resource="db.properties">-->
+<!--    </properties>-->
+<!--    &lt;!&ndash;    配置开发环境  可以多个environment连接多个数据库&ndash;&gt;-->
+<!--    <environments default="development">-->
+<!--        &lt;!&ndash; 加载数据库属性文件 &ndash;&gt;-->
+<!--        <environment id="development">-->
+<!--            &lt;!&ndash;            事务管理设置为jdbc管理&ndash;&gt;-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            &lt;!&ndash;            配置数据源&ndash;&gt;-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="${driver}"/>-->
+<!--                <property name="url" value="${url}"/>-->
+<!--                <property name="username" value="${username}"/>-->
+<!--                <property name="password" value="${password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
+<!--    <mappers>-->
+<!--        <mapper resource="classpath:mapper/UserMapper.xml"/>-->
+<!--        <mapper resource="classpath:mapper/Course.xml"/>-->
+<!--    </mappers>-->
+<!--</configuration>-->

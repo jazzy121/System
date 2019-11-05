@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>学生端</title>
 </head>
 <body>
-
+<div class="media" th:each="questions: ${pagination.questionList}">
+    <div class="media-left">
+        <a th:href="${questions.icon}">
+            <img class="media-object img-rounded"
+                 th:src="${questions.icon}"
+                 alt="...">
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading" th:text="${questions.title}">快速速学会Spring
+            Boot开发</h4>
+        <strong th:text="${questions.description}"
+                class="publish-desc"></strong><br>
+        <span>
+                    <span th:text="${questions.commentCount}"></span>回复 ~
+                        <span th:text="${questions.viewCount}"></span>次浏览 ~
+                        <span th:text="${questions.likeCount}"></span>个点赞 ~
+                        <span
+                                th:text="${#dates.format(questions.gmtCreated, 'yyyy-MM-dd HH:mm')}"></span>
+                    </span>
+    </div>
+</div>
 </body>
 </html>

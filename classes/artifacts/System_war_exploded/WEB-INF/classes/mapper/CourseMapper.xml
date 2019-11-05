@@ -1,0 +1,15 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.system.dao">-->
+<!--    <resultMap id="courseMap" type="course">-->
+<!--        <id column="id" property="id"/>-->
+<!--    </resultMap>-->
+<!--    <select id="selectMineCourse" parameterType="String">-->
+<!--     select selected from course where id in(#{account})-->
+<!--    </select>-->
+<!--    <select id="selectAll" parameterType="java.util.List">-->
+<!--    select id, course_name, teacher_id, class_hour, credit,-->
+<!--     time, total, selectedN, place, priviousC,from course-->
+<!--    </select>-->
+<!--</mapper>-->
