@@ -1,18 +1,14 @@
 package com.selectCourse.System.dao;
 
 
-import java.util.List;
-
 import com.selectCourse.System.dataobject.*;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.*;
 import org.springframework.stereotype.*;
 
+import java.util.*;
+
+@Mapper
 @Repository
 public interface CourseMapper {
     @Delete({
@@ -56,24 +52,24 @@ public interface CourseMapper {
     })
     Course selectByPrimaryKey(Integer id);
 
-    @Select({
-        "select",
-        "id, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
-        "priviousC",
-        "from course"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="course_name", property="courseName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="teacher_id", property="teacherId", jdbcType=JdbcType.VARCHAR),
-        @Result(column="class_hour", property="classHour", jdbcType=JdbcType.INTEGER),
-        @Result(column="credit", property="credit", jdbcType=JdbcType.INTEGER),
-        @Result(column="time", property="time", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="total", property="total", jdbcType=JdbcType.INTEGER),
-        @Result(column="selectedN", property="selectedn", jdbcType=JdbcType.INTEGER),
-        @Result(column="place", property="place", jdbcType=JdbcType.VARCHAR),
-        @Result(column="priviousC", property="priviousc", jdbcType=JdbcType.INTEGER)
-    })
+//    @Select({
+//        "select",
+//        "id, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
+//        "priviousC",
+//        "from course"
+//    })
+//    @Results({
+//        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+//        @Result(column="course_name", property="courseName", jdbcType=JdbcType.VARCHAR),
+//        @Result(column="teacher_id", property="teacherId", jdbcType=JdbcType.VARCHAR),
+//        @Result(column="class_hour", property="classHour", jdbcType=JdbcType.INTEGER),
+//        @Result(column="credit", property="credit", jdbcType=JdbcType.INTEGER),
+//        @Result(column="time", property="time", jdbcType=JdbcType.TIMESTAMP),
+//        @Result(column="total", property="total", jdbcType=JdbcType.INTEGER),
+//        @Result(column="selectedN", property="selectedn", jdbcType=JdbcType.INTEGER),
+//        @Result(column="place", property="place", jdbcType=JdbcType.VARCHAR),
+//        @Result(column="priviousC", property="priviousc", jdbcType=JdbcType.INTEGER)
+//    })
     List<Course> selectAll();
 
     @Update({

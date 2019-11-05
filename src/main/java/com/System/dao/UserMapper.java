@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.*;
 
-
+@Mapper
 @Repository
 public interface UserMapper {
     @Delete({
