@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * @date 2019/11/05
  */
+
 public class Course {
     /**
      * 课程id

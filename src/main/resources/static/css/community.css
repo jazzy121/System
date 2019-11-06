@@ -1,0 +1,40 @@
+body {
+    background-color: #EFEFEF !important;
+}
+
+a {
+    text-decoration: none;
+    color: #0f0f0f;
+}
+
+.main {
+    margin: 60px;
+    background-color: white;
+}
+
+.main .row {
+    margin-bottom: 15px;
+}
+
+.btn-publish {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.img-logo {
+    background-size: cover;
+    width: 48px;
+    height: auto;
+    display: inline-block !important;
+}
+
+.media-object {
+    width: 68px;
+    height: 68px;
+}
+
+.publish-desc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #0f0f0f;
+}

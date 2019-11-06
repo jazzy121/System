@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>教师端</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://thymeleaf.org">
 
+<head>
+    <title>选课系统</title>
+    <meta http-equiv="Content-Type" content=" text/html" charset="UTF-8"/>
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <link rel="stylesheet" href="css/community.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <script src="js/jquery-3.4.1.js" type="application/javascript"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">选课系统</span>
+            </button>
+            <a class="navbar-brand" href="/">选课系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${user!=null}">
+                    <span th:text="${user.name + user.role + ',您好'}"></span>
+                </li>
+                <li><a href="/login">返回登录</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <h2>
+                    <a href="/"><img src="images/favicon.ico" class="img-logo img-responsive"
+                                     alt="Responsive image"></a>
+                    全部课程</h2>
+                <hr>
+                <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">
+                    <div class="media-body">
+                        <h4 class="media-heading" th:text="${course.courseName}">
+                        </h4>
+                        <strong th:value="${course.id}"
+                                class="publish-desc"></strong><br>
+                        <span>
+                            <span th:text="'老师:'+${course.teacherId}"></span>~
+                            <span th:text="'地点:'+${course.place}"></span>~
+                            <span th:text="'学时:'+${course.classHour}"></span>~
+                            <span th:text="'学分:'+${course.credit}"></span>~
+                            <span th:text="'开课时间:'+
+                            ${#dates.format(course.time, 'yyyy-MM-dd HH:mm')}"></span>
+                            <textarea th:text="${course.target}" readonly name="target"
+                                      cols="20"
+                                      rows="4"></textarea>
+                         <a  th:href="@{/submit(account=${user.id},course=${course.id})}">
+                             <button type="submit" formmethod="post">选课</button>
+                        </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-lg-3 col-md-12 hcol-sm-12 col-xs-12">
+                <h1>我的课表</h1>
+                <hr>
+                <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
+                    <div class="media-body">
+                        <h4 class="media-heading" th:text="${mine.courseName}">
+                        </h4>
+                        <strong th:value="${mine.id}"
+                                class="publish-desc"></strong><br>
+                        <span>
+                            <span th:text="'老师:'+${mine.teacherId}"></span>~
+                            <span th:text="'地点:'+${mine.place}"></span>~
+                            <span th:text="'学时:'+${mine.classHour}"></span>~
+                            <span th:text="'学分:'+${mine.credit}"></span>~
+                            <span
+                                    th:text="'开课时间:'+${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
+                        </span>
+                    </div>
+                </div>
+                <h4 th:if="${mines==null}">还没选课呢</h4>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

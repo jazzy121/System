@@ -22,4 +22,5 @@ public class IndexController {
         List<Course> list = courseMapper.selectAll();
         return list;
     }
+
 }

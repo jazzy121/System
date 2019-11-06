@@ -96,7 +96,7 @@ public interface CourseMapper {
             "id, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
             "priviousC,target",
             "from course",
-            "where find_in_set(target,#{account,jdbcType=VARCHAR})  "
+            "where find_in_set(target,#{account,jdbcType=VARCHAR})"
     })
     List<Course> selectStudentCourse(@Param("account") String account);
 

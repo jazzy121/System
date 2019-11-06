@@ -31,8 +31,8 @@ public class LoginController {
             , @RequestParam("pwd") String pwd) {
         RedirectView view = new RedirectView();
         User user = userMapper.selectByPrimaryKey(account);
-        //密码加盐加密
-        pwd = MD5Utils.MD5DnCode(MD5Utils.MD5DnCode(pwd, "utf8") + SOLT, "utf8");
+        //密码加盐加密 弃用因为没有注册
+//        pwd = MD5Utils.MD5DnCode(MD5Utils.MD5DnCode(pwd, "utf8") + SOLT, "utf8");
         System.out.println(pwd);
         //登录成功
         if (user != null && pwd.equals(user.getPwd())) {

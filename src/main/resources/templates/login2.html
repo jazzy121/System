@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <title>登录页面</title>
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
 </head>
 <body>
 <div id="container">
     <div class="logo">
-        <a href="#"><img src="../static/inages/qq.png" alt="" /></a>
+        <a href="#"><img src="../static/images/favicon.ico" alt="" /></a>
     </div>
     <div id="box">
-        <form  method="post">
+        <form  action="/login" accept-charset="UTF-8"  method="POST">
             <p class="main">
-                <label>用户名: </label>
-                <input name="username" value="" />
+                <label>账号: </label>
+                <input name="account" value="" />
                 <label>密码: </label>
-                <input type="password" name="password" value="">
+                <input type="password" name="pwd" value="">
             </p>
             <p class="space">
                 <input type="submit" value="登录" class="login" style="cursor: pointer;"/>
