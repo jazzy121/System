@@ -2,6 +2,7 @@ package com.system.controller;
 
 import com.system.dao.*;
 import com.system.dataobject.*;
+import com.system.dto.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -25,8 +26,8 @@ public class PagesController {
 
     @GetMapping("/student")
     public String student(ModelMap modelMap,@RequestParam("account") String  account){
-        List<Course> list = courseMapper.selectAll();
-        List<Course> mines = courseMapper.selectStudentCourse(account+","); //加了逗号才能查 不知为何
+        List<CourseDTO> list = courseMapper.queryAll();
+        List<CourseDTO> mines = courseMapper.selectStudentCourse(account); //加了逗号才能查 不知为何
         User user = userMapper.selectByPrimaryKey(account);
         //把所有课程全部返回
         modelMap.addAttribute("user",user);
@@ -37,8 +38,8 @@ public class PagesController {
 
     @GetMapping("/teacher")
     public String teacher(ModelMap modelMap,@RequestParam("account") String  account){
-        List<Course> list = courseMapper.selectAll();
-        List<Course> mines = courseMapper.selectTeacherCourse(account+","); //加了逗号才能查 不知为何
+        List<CourseDTO> list = courseMapper.queryAll();
+        List<CourseDTO> mines = courseMapper.selectTeacherCourse(account); //加了逗号才能查 不知为何
         User user = userMapper.selectByPrimaryKey(account);
         //把所有课程全部返回
         modelMap.addAttribute("user",user);
@@ -49,7 +50,7 @@ public class PagesController {
 
     @GetMapping("/admin")
     public String admin(ModelMap modelMap,@RequestParam("account") String  account){
-        List<Course> list = courseMapper.selectAll();
+        List<CourseDTO> list = courseMapper.queryAll();
         User user = userMapper.selectByPrimaryKey(account);
         //把所有课程全部返回
         modelMap.addAttribute("user",user);

@@ -48,7 +48,7 @@
                         <strong th:value="${course.id}"
                                 class="publish-desc"></strong><br>
                         <span>
-                            <span th:text="'老师:'+${course.teacherId}"></span>~
+                            <span th:text="'老师:'+${course.name}"></span>~
                             <span th:text="'地点:'+${course.place}"></span>~
                             <span th:text="'学时:'+${course.classHour}"></span>~
                             <span th:text="'学分:'+${course.credit}"></span>~
@@ -74,7 +74,7 @@
                         <strong th:value="${mine.id}"s
                                 class="publish-desc"></strong><br>
                         <div>
-                            <span th:text="'老师:'+${mine.teacherId}"></span>~
+                            <span th:text="'老师:'+${mine.name}"></span>~
                             <span th:text="'地点:'+${mine.place}"></span>~
                             <span th:text="'学时:'+${mine.classHour}"></span>~
                             <span th:text="'学分:'+${mine.credit}"></span>~
