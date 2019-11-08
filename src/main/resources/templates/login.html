@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>登录页面</title>
-    <link rel="shortcut icon" href="../static/images/favicon.ico">
-    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 <div class="session-wrapper">
     <div class="session_header">
         <a href="#">
-            <img src="https://gitee.com/logo-red-circle-text.svg" alt="logo">
+            <img src="/images/favicon.ico" alt="logo">
         </a>
     </div>
     <div class="ui container">
@@ -31,16 +31,18 @@
                 <form class="session-register_form"
                       action="/login" accept-charset="UTF-8" id="new_user"
                       method="POST">
-                    <div class="parent" id="phone">
-                        <input  type="text" id="mobile" name="mobile" placeholder="手机号" onblur="checkMobile()" required>
+                    <div class="parent">
+                        <input  type="text" id="account" name="account" th:value="${account}"
+                                placeholder="account"
+                                required>
                     </div>
                     <div class="parent pwd" >
                         <input  class="user_pwd" id="rg-user_pwd" name="pwd" placeholder="密码" required
-                               onblur="checkPwd()" type="password">
+                                type="password">
                     </div>
                     <div class="parent remember">
-                        <input id="accept_term" name="accept" type="checkbox">
-                        <span>记住我</span>
+                        <input id="accept_term" name="accept" type="checkbox" required>
+                        <span>我同意遵守学校规章制度</span>
                     </div>
                     <button id="btn-submit" class="sub-register" type="submit">立即登录</button>
                 </form>
@@ -51,5 +53,4 @@
     </div>
 </div>
 </body>
-<script src="./js/login.js"></script>
 </html>

@@ -5,6 +5,7 @@ import com.system.dataobject.*;
 import com.system.utils.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.mvc.support.*;
@@ -19,10 +20,19 @@ public class LoginController {
     private UserMapper userMapper;
 
     //get请求就访问login页面
-    @GetMapping("/login")
-    public ModelAndView tologin(@ModelAttribute("account") String account) {
+    @GetMapping("/")
+    public ModelAndView tologin(@ModelAttribute("account") String account, Model model) {
         ModelAndView view = new ModelAndView();
-        view.setViewName("login2");
+        view.addObject("account",account);
+        view.setViewName("login");
+        return view;
+    }
+    //get请求就访问login页面
+    @GetMapping("/login")
+    public ModelAndView tologin2(@ModelAttribute("account") String account, Model model) {
+        ModelAndView view = new ModelAndView();
+        view.addObject("account",account);
+        view.setViewName("login");
         return view;
     }
 
@@ -55,7 +65,7 @@ public class LoginController {
         }
         //登录失败
         attributes.addFlashAttribute("account",account);
-        view.setUrl("/login2");
+        view.setUrl("/login");
         return view;
     }
 }

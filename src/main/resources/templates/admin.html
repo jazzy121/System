@@ -35,17 +35,84 @@
 <div class="main">
     <div class="container-fluid">
         <div class="row">
-            <div class=" col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <h2>
                     <a href="/"><img src="images/favicon.ico" class="img-logo img-responsive"
                                      alt="Responsive image"></a>
                     全部课程</h2>
                 <hr>
+                <form th:object="${newCourse}" action="/update" method="POST">
+                    <div class="form-group ">
+                        <label for="id">课程代码 (最高4位整型数字) :</label>
+                        <input type="text" class="form-control " th:field="*{id}"
+                               name="id" id="id" style="width: 500px"
+                               placeholder="课程代码,例:0001">
+                    </div>
+                    <div class="form-group ">
+                        <label for="courseName">课程名称 (20字以内) :</label>
+                        <input type="courseName" class="form-control " th:field="*{courseName}"
+                               name="courseName" id="courseName" style="width: 500px"
+                               placeholder="课程名称......">
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherId">授课老师代码 (必填) :</label>
+                        <textarea placeholder="根据右侧栏填写老师编号" name="teacherId"
+                                  th:field="*{teacherId}"
+                                  id="teacherId"
+                                  cols="30"
+                                  class="form-control"
+                                  rows="2"></textarea>
+                    </div>
+                    <div class="form-group ">
+                        <label for="classHour">学时 (最高4位整型数字) :</label>
+                        <input type="classHour" class="form-control " th:field="*{classHour}"
+                               name="classHour" id="classHour" style="width: 500px"
+                               placeholder="学时,例:36">
+                        <label for="credit">学分 (最高4位整型数字) :</label>
+                        <input type="credit" class="form-control " th:field="*{credit}"
+                               name="credit" id="credit" style="width: 500px"
+                               placeholder="学分......">
+                        <label for="time">开课时间 :</label>
+                        <input type="time" class="form-control " th:field="*{time}"
+                               name="time" id="time" style="width: 500px"
+                               placeholder="开课时间......">
+                        <label for="priviousc">先行课节数 (最高4位整型数字) :</label>
+                        <input type="priviousc" class="form-control " th:field="*{priviousc}"
+                               name="priviousc" id="priviousc" style="width: 500px"
+                               placeholder="先行课......">
+                    </div>
+                    <div class="form-group">
+                        <label for="place">上课地点 (20字以内):</label>
+                        <input type="text" class="form-control"
+                               name="place" id="place" th:field="*{place}" style="width: 300px"
+                               placeholder="上课地点,例:教一101">
+
+                    </div>
+                    <div class="form-group ">
+                        <label for="total">总人数 (最高4位整型数字) :</label>
+                        <input type="total" class="form-control " th:field="*{total}"
+                               name="total" id="total" style="width: 500px"
+                               placeholder="总人数......">
+                    </div>
+                    <div class="container-fluid main">
+                        <div class="row">
+                        <span class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12"
+                              role="alert" autocapitalize=""
+                              th:if="${loginError!=null}" th:text="${loginError}">
+                        </span>
+                            <button type="submit" class="btn btn-success btn-publish">发布</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class=" col-lg-3 col-md-12 hcol-sm-12 col-xs-12">
+                <h1>全部课程</h1>
+                <hr>
                 <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">
                     <div class="media-body">
                         <h4 class="media-heading" th:text="${course.courseName}">
                         </h4>
-                        <strong th:text="'课程代码:'+${course.id}"
+                        <strong id="courseId" th:text="'课程代码:'+${course.id}"
                                 class="publish-desc"></strong><br>
                         <span>
                             <span th:text="'老师:'+${course.name}"></span>~
@@ -57,37 +124,38 @@
                             <textarea th:text="${course.target}" readonly name="target"
                                       cols="20"
                                       rows="1"></textarea>
-                         <a  th:href="@{/submit(account=${user.id},course=${course.id})}">
-                             <button type="submit" formmethod="post">选课</button>
+                         <a  id="checkDelete"
+                             th:href="@{/delete(account=${user.id},course=${course.id})}">
+                             <button type="submit" formmethod="post">删除该课程</button>
                         </a>
                         </span>
                     </div>
                 </div>
             </div>
             <div class=" col-lg-3 col-md-12 hcol-sm-12 col-xs-12">
-                <h1>我的课表</h1>
+                <h1>全部老师</h1>
                 <hr>
-                <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
+                <div class="media" th:if="${teachers !=null}" th:each="teacher: ${teachers}">
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${mine.courseName}">
+                        <h4 class="media-heading" th:text="${teacher.name}">
                         </h4>
-                        <strong th:text="'课程代码:'+${mine.id}"s
+                        <strong th:text="'老师代码:'+${teacher.id}"
                                 class="publish-desc"></strong><br>
-                        <div>
-                            <span th:text="'老师:'+${mine.name}"></span>~
-                            <span th:text="'地点:'+${mine.place}"></span>~
-                            <span th:text="'学时:'+${mine.classHour}"></span>~
-                            <span th:text="'学分:'+${mine.credit}"></span>~
-                            <span
-                                    th:text="'开课时间:'+${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
-                        </div>
                     </div>
                 </div>
-                <h4 th:if="${mines==null}">还没选课呢</h4>
             </div>
         </div>
     </div>
 </div>
 </body>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#checkDelete").click(function(){
+            var str = $("#courseId").value();
+           alert('确定删除'+str+"吗?");
+        });
 
+    });
+</script>
 </html>
