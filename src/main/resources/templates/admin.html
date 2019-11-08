@@ -45,7 +45,7 @@
                     <div class="media-body">
                         <h4 class="media-heading" th:text="${course.courseName}">
                         </h4>
-                        <strong th:value="${course.id}"
+                        <strong th:text="'课程代码:'+${course.id}"
                                 class="publish-desc"></strong><br>
                         <span>
                             <span th:text="'老师:'+${course.name}"></span>~
@@ -71,7 +71,7 @@
                     <div class="media-body">
                         <h4 class="media-heading" th:text="${mine.courseName}">
                         </h4>
-                        <strong th:value="${mine.id}"s
+                        <strong th:text="'课程代码:'+${mine.id}"s
                                 class="publish-desc"></strong><br>
                         <div>
                             <span th:text="'老师:'+${mine.name}"></span>~

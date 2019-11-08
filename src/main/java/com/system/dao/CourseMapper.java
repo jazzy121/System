@@ -120,7 +120,7 @@ public interface CourseMapper {
             "join user on  find_in_set(user.id,teacher_id)"
     })
     @Results( id = "dto",value = {
-            @Result(column = "course.id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
             @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
             @Result(column = "course_name", property = "courseName", jdbcType = JdbcType.VARCHAR),
             @Result(column = "teacher_id", property = "teacherId", jdbcType = JdbcType.VARCHAR),
