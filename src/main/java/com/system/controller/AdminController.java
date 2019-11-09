@@ -6,10 +6,12 @@ import com.system.dto.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.*;
 import org.springframework.web.servlet.view.*;
 
+import javax.validation.*;
 import java.util.*;
 
 @Controller
@@ -22,12 +24,15 @@ public class AdminController {
 
 
     @GetMapping("/admin")
-    public String admin(ModelMap modelMap, @RequestParam("account") String account) {
+    public String admin(@ModelAttribute("newCourse") Course newCourse,ModelMap modelMap,
+            @RequestParam("account") String account) {
         List<CourseDTO> list = courseMapper.queryAll();
         User user = userMapper.selectByPrimaryKey(account);
+        User teachers = userMapper.selectByRole("teacher");
         //把所有课程全部返回
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("courses", list);
+        modelMap.addAttribute("teachers", teachers);
         return "admin";
     }
 
@@ -57,19 +62,28 @@ public class AdminController {
     @PostMapping("/update")
     public RedirectView update(RedirectAttributes attributes,
                                @RequestParam("account") String account,
-                               Course newcourse) {
+                               @Valid Course newCourse,BindingResult result) {
         RedirectView view = new RedirectView();
         User user = userMapper.selectByPrimaryKey(account);
         //用户存在且是管理员
         if (user != null && user.getRole().equals("admin")) {
+
+            //综合判断哪一项 有错
+            if(result.hasErrors()){
+                attributes.addFlashAttribute("newCourse",newCourse);
+                attributes.addFlashAttribute("newCourseError",result);
+                view.setUrl("/admin?account=" + account);
+                return view;
+            }
+            //没错 则继续
             //新增了
-            Course course = courseMapper.selectByPrimaryKey(newcourse.getId());
+            Course course = courseMapper.selectByPrimaryKey(newCourse.getId());
 
             if(course!=null){
                 //更新
-                courseMapper.updateByPrimaryKey(newcourse);
+                courseMapper.updateByPrimaryKey(newCourse);
             }else
-            courseMapper.insert(newcourse);
+            courseMapper.insert(newCourse);
 
             view.setUrl("/admin?account=" + account);
             return view;

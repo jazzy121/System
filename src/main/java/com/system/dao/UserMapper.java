@@ -93,4 +93,12 @@ public interface UserMapper {
     })
     int updateByPrimaryKey(User record);
 
+    //老师选出来
+    @Select({
+            "select",
+            "id, name, role, gender, email, depart, degree, occupation, mobile, major, ",
+            "from user",
+            "where role = #{role}"
+    })
+    User selectByRole(@Param("role")String role);
 }

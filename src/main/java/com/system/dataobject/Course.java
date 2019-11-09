@@ -1,5 +1,6 @@
 package com.system.dataobject;
 
+import javax.validation.constraints.*;
 import java.util.Date;
 
 /**
@@ -15,31 +16,40 @@ public class Course {
     /**
      * 课程名
      */
+    @NotNull
     private String courseName;
 
     /**
      * 授课老师编号
      */
+    @NotNull
     private String teacherId;
 
     /**
      * 课时
      */
+    @NotNull
+    @Max(4)
     private Integer classHour;
 
     /**
      * 学分
      */
+    @NotNull
+    @Max(4)
     private Integer credit;
 
     /**
      * 开课时间
      */
+    @NotNull
     private Date time;
 
     /**
      * 总人数
      */
+    @NotNull
+    @Max(4)
     private Integer total;
 
     /**
@@ -50,6 +60,7 @@ public class Course {
     /**
      * 地点
      */
+    @NotNull
     private String place;
 
     /**
