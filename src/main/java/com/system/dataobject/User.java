@@ -1,13 +1,12 @@
 package com.system.dataobject;
 
 /**
- * 
  * @date 2019/11/05
  */
 public class User {
     /**
      * id编号
-作账户登录编号
+     * 作账户登录编号
      */
     private String id;
 
@@ -23,15 +22,14 @@ public class User {
 
     /**
      * 用户权限限制
-student 学生
-teacher 老师
-admin 管理员
+     * student 学生
+     * teacher 老师
+     * admin 管理员
      */
     private String role;
 
     /**
      * 性别
-
      */
     private String gender;
 
@@ -69,6 +67,20 @@ admin 管理员
      * 学生班级
      */
     private String classname;
+
+    /**
+     * 创建日期
+     *
+     * @return
+     */
+    private String gmtCreated;
+
+    /**
+     * 修改日期
+     *
+     * @return
+     */
+    private String gmtModified;
 
 
     public String getId() {
@@ -165,5 +177,21 @@ admin 管理员
 
     public void setClassname(String classname) {
         this.classname = classname;
+    }
+
+    public String getGmtCreated() {
+        return gmtCreated;
+    }
+
+    public void setGmtCreated(String gmtCreated) {
+        this.gmtCreated = gmtCreated;
+    }
+
+    public String getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(String gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

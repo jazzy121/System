@@ -65,6 +65,18 @@ public class CourseDTO {
      */
     private String name;
 
+    /**
+     * 创建日期
+     * @return
+     */
+    private String gmtCreated;
+
+    /**
+     * 修改日期
+     * @return
+     */
+    private String gmtModified;
+
     public Integer getId() {
         return id;
     }
@@ -159,5 +171,21 @@ public class CourseDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGmtCreated() {
+        return gmtCreated;
+    }
+
+    public void setGmtCreated(String gmtCreated) {
+        this.gmtCreated = gmtCreated;
+    }
+
+    public String getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(String gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

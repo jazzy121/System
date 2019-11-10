@@ -36,25 +36,49 @@ public class StudentController {
 
 
     @PostMapping("/submit")
-    public RedirectView submit(RedirectAttributes attributes,
+    public RedirectView submit(
                                @RequestParam("account") String account,
-                               @RequestParam("course") Integer course) {
+                               @RequestParam("course") Integer course,ModelMap modelMap) {
 
         RedirectView view = new RedirectView();
         User user = userMapper.selectByPrimaryKey(account);
         //用农户存在并且是学生
         if (user != null && user.getRole().equals("student")) {
-
             //新增了
             Course mycourse = courseMapper.selectByPrimaryKey(course);
+            //人满了 不能再选了 或者有问题
+            if(mycourse.getSelectedn() >=mycourse.getTotal() ||mycourse.getSelectedn()==null || mycourse.getTotal()==null){
+                modelMap.addAttribute("message","人满了!");
+            }
             StringBuffer stringBuffer = new StringBuffer(mycourse.getTarget());
             stringBuffer.append(account);
             stringBuffer.append(",");
             mycourse.setTarget(stringBuffer.toString());
+            mycourse.setSelectedn(mycourse.getSelectedn()+1);
             courseMapper.updateByPrimaryKey(mycourse);
             view.setUrl("/student?account=" + account);
             return view;
         }
+        //否则
+        view.setUrl("/login");
+        return view;
+    }
+    @PostMapping("/quit")
+    public RedirectView quit(
+                               @RequestParam("account") String account,
+                               @RequestParam("course") Integer course) {
+        RedirectView view = new RedirectView();
+        User user = userMapper.selectByPrimaryKey(account);
+        //用农户存在并且是学生
+        if (user != null && user.getRole().equals("student")) {
+            //新增了
+            Course mycourse = courseMapper.selectByPrimaryKey(course);
+            mycourse.setTarget(mycourse.getTarget().replace(account+",",""));
+            courseMapper.updateByPrimaryKey(mycourse);
+            view.setUrl("/student?account=" + account);
+            return view;
+        }
+
         //否则
         view.setUrl("/login");
         return view;

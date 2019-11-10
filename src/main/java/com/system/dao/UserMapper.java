@@ -22,19 +22,20 @@ public interface UserMapper {
             "pwd, role, gender, ",
             "email, depart, degree, ",
             "occupation, mobile, ",
-            "major, classname, )",
+            "major, classname,gmt_created,gmt_modified)",
             "values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, ",
             "#{pwd,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, ",
             "#{email,jdbcType=VARCHAR}, #{depart,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, ",
             "#{occupation,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, ",
-            "#{major,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, "
+            "#{major,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR},",
+            "now(),now()) "
     })
     int insert(User record);
 
     @Select({
             "select",
             "id, name, pwd, role, gender, email, depart, degree, occupation, mobile, major, ",
-            "classname",
+            "classname,gmt_created,gmt_modified",
             "from user",
             "where id = #{id,jdbcType=VARCHAR}"
     })
@@ -50,14 +51,17 @@ public interface UserMapper {
             @Result(column = "occupation", property = "occupation", jdbcType = JdbcType.VARCHAR),
             @Result(column = "mobile", property = "mobile", jdbcType = JdbcType.VARCHAR),
             @Result(column = "major", property = "major", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "classname", property = "classname", jdbcType = JdbcType.VARCHAR)
+            @Result(column = "classname", property = "classname", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "gmt_created", property = "gmtCreated", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "gmt_modified", property = "gmtModified", jdbcType =
+                    JdbcType.TIMESTAMP)
     })
     User selectByPrimaryKey(String id);
 
     @Select({
             "select",
             "id, name, pwd, role, gender, email, depart, degree, occupation, mobile, major, ",
-            "classname",
+            "classname,gmt_created,gmt_modified",
             "from user"
     })
     @Results({
@@ -72,7 +76,10 @@ public interface UserMapper {
             @Result(column = "occupation", property = "occupation", jdbcType = JdbcType.VARCHAR),
             @Result(column = "mobile", property = "mobile", jdbcType = JdbcType.VARCHAR),
             @Result(column = "major", property = "major", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "classname", property = "classname", jdbcType = JdbcType.VARCHAR)
+            @Result(column = "classname", property = "classname", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "gmt_created", property = "gmtCreated", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "gmt_modified", property = "gmtModified", jdbcType =
+                    JdbcType.TIMESTAMP)
     })
     List<User> selectAll();
 
@@ -89,6 +96,8 @@ public interface UserMapper {
             "mobile = #{mobile,jdbcType=VARCHAR},",
             "major = #{major,jdbcType=VARCHAR},",
             "classname = #{classname,jdbcType=VARCHAR},",
+            "gmt_created = now(),",
+            "gmt_modified = now()",
             "where id = #{id,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(User record);
@@ -96,9 +105,9 @@ public interface UserMapper {
     //老师选出来
     @Select({
             "select",
-            "id, name, role, gender, email, depart, degree, occupation, mobile, major, ",
+            "id, name, role, gender, email, depart, degree, occupation, mobile, major ",
             "from user",
-            "where role = #{role}"
+            "where role = #{role,jdbcType=VARCHAR}"
     })
-    User selectByRole(@Param("role")String role);
+    List<User> selectByRole(@Param("role") String role);
 }

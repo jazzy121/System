@@ -24,12 +24,12 @@ public class TeacherController {
 
     @GetMapping("/teacher")
     public String teacher(ModelMap modelMap,@RequestParam("account") String  account){
-        List<CourseDTO> list = courseMapper.queryAll();
+//        List<CourseDTO> list = courseMapper.queryAll();
         List<CourseDTO> mines = courseMapper.selectTeacherCourse(account); //加了逗号才能查 不知为何
         User user = userMapper.selectByPrimaryKey(account);
         //把所有课程全部返回
         modelMap.addAttribute("user",user);
-        modelMap.addAttribute("courses",list);
+//        modelMap.addAttribute("courses",list);
         modelMap.addAttribute("mines",mines);
         return "teacher";
     }

@@ -11,56 +11,53 @@ public class Course {
     /**
      * 课程id
      */
+    @NotNull(message="课程id不能为空!")
     private Integer id;
 
     /**
      * 课程名
      */
-    @NotNull
+    @NotNull(message="课程名不能为空!")
     private String courseName;
 
     /**
      * 授课老师编号
      */
-    @NotNull
+    @NotNull(message="授课老师编号不能为空!")
     private String teacherId;
 
     /**
      * 课时
      */
-    @NotNull
-    @Max(4)
+    @NotNull(message="课时不能为空!")
     private Integer classHour;
 
     /**
      * 学分
      */
-    @NotNull
-    @Max(4)
+    @NotNull(message="学分不能为空!")
     private Integer credit;
 
     /**
      * 开课时间
      */
-    @NotNull
     private Date time;
 
     /**
      * 总人数
      */
-    @NotNull
-    @Max(4)
-    private Integer total;
+    @NotNull(message="总人数不能为空!")
+    private Integer total=0;
 
     /**
      * 已选人数
      */
-    private Integer selectedn;
+    private Integer selectedn=0;
 
     /**
      * 地点
      */
-    @NotNull
+    @NotNull(message="地点不能为空!")
     private String place;
 
     /**
@@ -74,6 +71,18 @@ public class Course {
      * @return
      */
     private String target;
+
+    /**
+     * 创建日期
+     * @return
+     */
+    private String gmtCreated;
+
+    /**
+     * 修改日期
+     * @return
+     */
+    private String gmtModified;
 
     public String getTarget() {
         return target;
@@ -161,5 +170,21 @@ public class Course {
 
     public void setPriviousc(Integer priviousc) {
         this.priviousc = priviousc;
+    }
+
+    public String getGmtCreated() {
+        return gmtCreated;
+    }
+
+    public void setGmtCreated(String gmtCreated) {
+        this.gmtCreated = gmtCreated;
+    }
+
+    public String getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(String gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

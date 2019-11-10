@@ -27,12 +27,15 @@ a {
     height: auto;
     display: inline-block !important;
 }
-
+.main .media-body .makeItList > .content{
+    display: inline-block!important;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
 .media-object {
     width: 68px;
     height: 68px;
 }
-
 .publish-desc {
     font-size: 12px;
     font-weight: normal;

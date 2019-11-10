@@ -35,10 +35,11 @@
 <div class="main">
     <div class="container-fluid">
         <div class="row">
-            <div class=" col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <div class=" col-lg-7 col-md-12 col-sm-12 col-xs-12">
                 <h2>
-                    <a href="/"><img src="images/favicon.ico" class="img-logo img-responsive"
-                                     alt="Responsive image"></a>
+                    <a th:href="@{/student(account=${user.id})}"><img
+                            src="images/favicon.ico" class="img-logo img-responsive"
+                            alt="Responsive image"></a>
                     全部课程</h2>
                 <hr>
                 <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">
@@ -46,32 +47,38 @@
                         <h4 class="media-heading" th:text="${course.courseName}">
                         </h4>
                         <strong th:text="'课程代码:'+${course.id}"
-                                class="publish-desc"></strong><br>
+                                class="publish-desc"></strong>
+                        <br>
                         <span>
-                            <span th:text="'老师:'+${course.name}"></span>~
-                            <span th:text="'地点:'+${course.place}"></span>~
-                            <span th:text="'学时:'+${course.classHour}"></span>~
-                            <span th:text="'学分:'+${course.credit}"></span>~
-                            <span th:text="'开课时间:'+
+                            <span class="content" th:text="'老师:'+${course.name}"></span>~
+                            <span class="content" th:text="'地点:'+${course.place}"></span>~
+                            <span class="content" th:text="'学时:'+${course.classHour}"></span>~
+                            <span class="content" th:text="'学分:'+${course.credit}"></span>~
+                            <span class="content" th:text="'开课时间:'+
                             ${#dates.format(course.time, 'yyyy-MM-dd HH:mm')}"></span>
                             <textarea th:text="${course.target}" readonly name="target"
                                       cols="20"
                                       rows="1"></textarea>
-                         <a  th:href="@{/submit(account=${user.id},course=${course.id})}">
+                         <a th:href="@{/submit(account=${user.id},course=${course.id})}">
                              <button type="submit" formmethod="post">选课</button>
                         </a>
                         </span>
+                        <span class="alert-warning" th:text="${message}"></span>
                     </div>
                 </div>
             </div>
-            <div class=" col-lg-3 col-md-12 hcol-sm-12 col-xs-12">
-                <h1>我的课表</h1>
+            <div class=" col-lg-5 col-md-12 hcol-sm-12 col-xs-12">
+                <h1>
+                    <a th:href="@{/student(account=${user.id})}"><img
+                            src="images/favicon.ico" class="img-logo img-responsive"
+                            alt="Responsive image"></a>
+                    我的课表</h1>
                 <hr>
                 <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
                     <div class="media-body">
                         <h4 class="media-heading" th:text="${mine.courseName}">
                         </h4>
-                        <strong th:text="'课程代码:'+${mine.id}"s
+                        <strong th:text="'课程代码:'+${mine.id}"
                                 class="publish-desc"></strong><br>
                         <div>
                             <span th:text="'老师:'+${mine.name}"></span>~
@@ -80,6 +87,9 @@
                             <span th:text="'学分:'+${mine.credit}"></span>~
                             <span
                                     th:text="'开课时间:'+${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
+                            <a th:href="@{/quit(account=${user.id},course=${mine.id})}">
+                                <button type="submit" formmethod="post">退选</button>
+                            </a>
                         </div>
                     </div>
                 </div>

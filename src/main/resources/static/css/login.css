@@ -104,7 +104,7 @@ p{
     content: "";
     clear: both;
 }
-#accept_term{
+#teacher, #student ,#admin{
     padding: 0;
     width: 18px;
     height: 18px;
@@ -120,7 +120,11 @@ p{
     font-size: 16px;
 }
 
-
+#accept_term {
+    padding: 0;
+    width: 18px;
+    height: 18px;
+}
 .session-form .forget{
     margin-left:90px;
     margin-top:5px;
