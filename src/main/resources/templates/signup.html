@@ -31,6 +31,7 @@
                 <form class="session-register_form"
                       action="/signup" accept-charset="UTF-8" id="new_user"
                       method="POST">
+                    <p th:text="${message}"></p>
                     <div class="parent">
                         <input type="text" id="id" name="id" th:value="${id}"
                                placeholder="学号,例:B18010101"

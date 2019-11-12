@@ -26,20 +26,19 @@ public class SignupController {
     @GetMapping("/signup")
     public ModelAndView tosignup(@ModelAttribute("student") User student, Model model) {
         ModelAndView view = new ModelAndView();
-        view.addObject(BindingResult.class.getName()+".student",
-                model.asMap().get("studentError"));
+//        view.addObject(BindingResult.class.getName()+".student",
+//                model.asMap().get("studentError"));
         view.setViewName("signup");
         return view;
     }
 
     @PostMapping("/signup")
-    public RedirectView signup(RedirectAttributes attributes,
-                               @Valid User student, BindingResult result) {
+    public RedirectView signup(RedirectAttributes attributes,User student) {
         RedirectView view = new RedirectView();
         //已被注册
         if (userMapper.selectByPrimaryKey(student.getId()) != null) {
             attributes.addFlashAttribute("student", student);
-            attributes.addFlashAttribute("studentError", result);
+            attributes.addFlashAttribute("message", "请勿重复注册!");
             view.setUrl("/signup");
             return view;
         }
