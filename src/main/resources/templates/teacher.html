@@ -4,7 +4,7 @@
 <head>
     <title>选课系统</title>
     <meta http-equiv="Content-Type" content=" text/html" charset="UTF-8"/>
-    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="css/community.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
@@ -41,46 +41,51 @@
                                      alt="Responsive image"></a>
                     我的课表</h2>
                 <hr>
-                <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
-                    <div class="media-body">
-                        <h4 class="media-heading" th:text="${mine.courseName}">
-                        </h4>
-                        <strong th:text="'课程代码:'+${mine.id}"s
-                                class="publish-desc"></strong><br>
-                        <div>
-                            <span th:text="'地点:'+${mine.place}"></span>~
-                            <span th:text="'学时:'+${mine.classHour}"></span>~
-                            <span th:text="'学分:'+${mine.credit}"></span>~
-                            <span
-                                    th:text="'开课时间:'+${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
-                            <textarea th:text="${mine.target}" readonly name="target"
-                                      cols="20"
-                                      rows="1"></textarea>
+                <div class="myScroller">
+                    <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${mine.courseName}">
+                            </h4>
+                            <strong th:text="'课程代码:'+${mine.id}" s
+                                    class="publish-desc"></strong><br>
+                            <div class="makeItList">
+                                <span class="content" th:text="'地点:'+${mine.place}"></span>
+                                <span class="content" th:text="'学时:'+${mine.classHour}"></span>
+                                <span class="content" th:text="'学分:'+${mine.credit}"></span>
+                                <span class="content" th:text="'开课时间:'+
+                            ${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
+                                <span class="content" th:text="'先行课节数:'+${mine.priviousc}"></span>
+                                <span class="content" th:text="'总人数:'+${mine.total}"></span>
+                                <span class="content" th:text="'已选人数:'+${mine.selectedn}"></span>
+                                <textarea class="content2" th:text="${'您的学生:'+mine.target}"
+                                          readonly name="target"
+                                          cols="60" rows="2"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <h4 th:if="${mines==null}">还没选课呢</h4>
             </div>
-<!--            <div class=" col-lg-3 col-md-12 hcol-sm-12 col-xs-12">-->
-<!--                <h1>全部课程(其他老师)</h1>-->
-<!--                <hr>-->
-<!--                <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">-->
-<!--                    <div class="media-body">-->
-<!--                        <h4 class="media-heading" th:text="${course.courseName}">-->
-<!--                        </h4>-->
-<!--                        <strong th:text="'课程代码:'+${course.id}"-->
-<!--                                class="publish-desc"></strong><br>-->
-<!--                        <span>-->
-<!--                            <span th:text="'老师:'+${course.name}"></span>~-->
-<!--                            <span th:text="'地点:'+${course.place}"></span>~-->
-<!--                            <span th:text="'学时:'+${course.classHour}"></span>~-->
-<!--                            <span th:text="'学分:'+${course.credit}"></span>~-->
-<!--                            <span th:text="'开课时间:'+-->
-<!--                            ${#dates.format(course.time, 'yyyy-MM-dd HH:mm')}"></span>-->
-<!--                        </span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class=" col-lg-3 col-md-12 hcol-sm-12 col-xs-12">-->
+            <!--                <h1>全部课程(其他老师)</h1>-->
+            <!--                <hr>-->
+            <!--                <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">-->
+            <!--                    <div class="media-body">-->
+            <!--                        <h4 class="media-heading" th:text="${course.courseName}">-->
+            <!--                        </h4>-->
+            <!--                        <strong th:text="'课程代码:'+${course.id}"-->
+            <!--                                class="publish-desc"></strong><br>-->
+            <!--                        <span>-->
+            <!--                            <span th:text="'老师:'+${course.name}"></span>~-->
+            <!--                            <span th:text="'地点:'+${course.place}"></span>~-->
+            <!--                            <span th:text="'学时:'+${course.classHour}"></span>~-->
+            <!--                            <span th:text="'学分:'+${course.credit}"></span>~-->
+            <!--                            <span th:text="'开课时间:'+-->
+            <!--                            ${#dates.format(course.time, 'yyyy-MM-dd HH:mm')}"></span>-->
+            <!--                        </span>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
     </div>
 </div>

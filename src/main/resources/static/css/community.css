@@ -27,15 +27,41 @@ a {
     height: auto;
     display: inline-block !important;
 }
-.main .media-body .makeItList > .content{
-    display: inline-block!important;
+
+.myScroller {
+    height: 850px;
+    overflow-y: scroll;
+    padding: 10px 5px;
+}
+.form-group p{
+    color: red;
+    font-weight: bolder;
+}
+.alert-warning{
+    margin: 15px 0;
+}
+.main .media-body .makeItList > .content {
+    display: inline-block !important;
     border-left: 1px solid black;
-    border-right: 1px solid black;
+    /*border-right: 1px solid black;*/
+    padding: 0 10px;
+    margin-bottom: 10px;
+    line-height: 20px;
+    width:200px;
+}
+
+.main .media-body .makeItList > .content2 {
+    padding: 0 10px;
+    display: block;
+}
+.my-btn{
+    float: right; margin-right: 50px;
 }
 .media-object {
     width: 68px;
     height: 68px;
 }
+
 .publish-desc {
     font-size: 12px;
     font-weight: normal;

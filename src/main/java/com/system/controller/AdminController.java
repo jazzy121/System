@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.mvc.support.*;
 import org.springframework.web.servlet.view.*;
+import org.thymeleaf.util.StringUtils;
 
 import javax.validation.*;
 import java.text.*;
@@ -32,21 +33,30 @@ public class AdminController {
                               @RequestParam("account") String account) {
         ModelAndView view = new ModelAndView();
         List<CourseDTO> list = courseMapper.queryAll();
+        for (CourseDTO courseDTO : list) {
+            //把老师们的id传进去  得到一个用户名组成的set  转化为string 设置到dto里
+            if(courseDTO.getTeacherId()==null){
+                courseDTO.setName("无");
+                continue;
+            }
+            courseDTO.setName(StringUtils.join(userMapper.selCourseTeacher(courseDTO.getTeacherId()),"~"));
+        }
+
         User user = userMapper.selectByPrimaryKey(account);
         List<User> teachers = userMapper.selectByRole("teacher");
         //把所有课程全部返回
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("courses", list);
         modelMap.addAttribute("teachers", teachers);
-        view.addObject(BindingResult.class.getName() + ".userForm",
-                modelMap.get("userFormError"));
+        view.addObject(BindingResult.class.getName() + ".newCourse",
+                modelMap.get("newCourseError"));
         view.setViewName("admin");
         return view;
     }
 
 
     //删除课程
-    @PostMapping("/delete")
+    @RequestMapping("/delete")
     public RedirectView delete(RedirectAttributes attributes,
                                @RequestParam("account") String account,
                                @RequestParam("course") Integer course) {
@@ -74,9 +84,8 @@ public class AdminController {
                                @Valid Course newCourse, BindingResult result) throws ParseException {
         RedirectView view = new RedirectView();
         User user = userMapper.selectByPrimaryKey(account);
-        //用户存在且是管理员
+        //用户存在且是管理员9
         if (user != null && user.getRole().equals("admin")) {
-
             //综合判断哪一项 有错
             if (result.hasErrors()) {
                 attributes.addFlashAttribute("newCourse", newCourse);

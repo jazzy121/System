@@ -1,7 +1,7 @@
 package com.system.dao;
 
 
-import java.util.List;
+import java.util.*;
 
 import com.system.dataobject.*;
 import org.apache.ibatis.annotations.*;
@@ -110,4 +110,13 @@ public interface UserMapper {
             "where role = #{role,jdbcType=VARCHAR}"
     })
     List<User> selectByRole(@Param("role") String role);
+
+    //test  根据进来的老师们id 得到一整个set的name
+    @Select({
+            "select",
+            " name",
+            "from user",
+            "where  find_in_set(id, #{teachers,jdbcType=LONGVARCHAR})"
+    })
+    List<String> selCourseTeacher(@Param("teachers")String teachers);
 }

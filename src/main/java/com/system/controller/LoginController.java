@@ -45,7 +45,7 @@ public class LoginController {
         User user = userMapper.selectByPrimaryKey(account);
         //密码加盐加密
         pwd = MD5Utils.MD5DnCode(MD5Utils.MD5DnCode(pwd, "utf8") + SOLT, "utf8");
-        System.out.println(pwd);
+//        System.out.println(pwd);
         //登录成功
         if (user != null && pwd.equals(user.getPwd())) {
             //用户鉴权

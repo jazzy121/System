@@ -12,6 +12,7 @@ public class Course {
      * 课程id
      */
     @NotNull(message="课程id不能为空!")
+    @Max(4)
     private Integer id;
 
     /**
@@ -30,12 +31,14 @@ public class Course {
      * 课时
      */
     @NotNull(message="课时不能为空!")
+    @Max(4)
     private Integer classHour;
 
     /**
      * 学分
      */
     @NotNull(message="学分不能为空!")
+    @Max(4)
     private Integer credit;
 
     /**
@@ -47,6 +50,7 @@ public class Course {
      * 总人数
      */
     @NotNull(message="总人数不能为空!")
+    @Max(4)
     private Integer total=0;
 
     /**

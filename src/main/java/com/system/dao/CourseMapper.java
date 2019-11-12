@@ -101,16 +101,63 @@ public interface CourseMapper {
     })
     int updateByPrimaryKey(Course record);
 
+//    @Select({
+//            "select",
+//            "course.id, user.name, course_name, teacher_id, class_hour, credit, time, total, ",
+//            "selectedN,place, priviousC,target,course.gmt_created,course.gmt_modified",
+//            "from course",
+//            "left join user on  find_in_set(user.id,teacher_id)"
+//    })
+//    @ResultMap("dto")
+//    List<CourseDTO> queryAll2();
+//
+//    //学生的课
+//    @Select({
+//            "select",
+//            "course.id, user.name, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
+//            "priviousC,target,course.gmt_created,course.gmt_modified",
+//            "from course",
+//            "join user on  find_in_set(user.id,teacher_id)",
+//            "where find_in_set(#{account,jdbcType=VARCHAR},target)"
+//    })
+//    @ResultMap("dto")
+//    List<CourseDTO> selectStudentCourse2(@Param("account") String account);
+
+    //老师的课
     @Select({
             "select",
-            "course.id, user.name, course_name, teacher_id, class_hour, credit, time, total, ",
-            "selectedN,place, priviousC,target,course.gmt_created,course.gmt_modified",
+            "course.id, course_name, teacher_id, class_hour, credit, time, total, selectedN, place,",
+            "priviousC,target,gmt_created,gmt_modified",
             "from course",
-            "join user on  find_in_set(user.id,teacher_id)"
+            "where find_in_set(#{account,jdbcType=VARCHAR},teacher_id)"
     })
     @Results(id = "dto", value = {
             @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
-            @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "course_name", property = "courseName", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "teacher_id", property = "teacherId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "class_hour", property = "classHour", jdbcType = JdbcType.INTEGER),
+            @Result(column = "credit", property = "credit", jdbcType = JdbcType.INTEGER),
+            @Result(column = "time", property = "time", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "total", property = "total", jdbcType = JdbcType.INTEGER),
+            @Result(column = "selectedN", property = "selectedn", jdbcType = JdbcType.INTEGER),
+            @Result(column = "place", property = "place", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "priviousC", property = "priviousc", jdbcType = JdbcType.INTEGER),
+            @Result(column = "target", property = "target", jdbcType = JdbcType.LONGVARCHAR),
+            @Result(column = "gmt_created", property = "gmtCreated", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "gmt_modified", property = "gmtModified", jdbcType = JdbcType.TIMESTAMP)
+    })
+    List<Course> selectTeacherCourse(@Param("account") String account);
+
+
+    //逻辑重写
+    @Select({
+            "select",
+            "id, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
+            "priviousC,target,gmt_created,gmt_modified",
+            "from course"
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
             @Result(column = "course_name", property = "courseName", jdbcType = JdbcType.VARCHAR),
             @Result(column = "teacher_id", property = "teacherId", jdbcType = JdbcType.VARCHAR),
             @Result(column = "class_hour", property = "classHour", jdbcType = JdbcType.INTEGER),
@@ -126,28 +173,28 @@ public interface CourseMapper {
     })
     List<CourseDTO> queryAll();
 
-
-    //学生的课
+    //逻辑重写
     @Select({
             "select",
-            "course.id, user.name, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
-            "priviousC,target,course.gmt_created,course.gmt_modified",
+            "id, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
+            "priviousC,target,gmt_created,gmt_modified",
             "from course",
-            "join user on  find_in_set(user.id,teacher_id)",
             "where find_in_set(#{account,jdbcType=VARCHAR},target)"
     })
-    @ResultMap("dto")
-    List<CourseDTO> selectStudentCourse(@Param("account") String account);
-
-    //老师的课
-    @Select({
-            "select",
-            "course.id, user.name, course_name, teacher_id, class_hour, credit, time, total, selectedN, place, ",
-            "priviousC,target,course.gmt_created,course.gmt_modified",
-            "from course",
-            "join user on  find_in_set(user.id,teacher_id)",
-            "where find_in_set(#{account,jdbcType=VARCHAR},teacher_id)"
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "course_name", property = "courseName", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "teacher_id", property = "teacherId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "class_hour", property = "classHour", jdbcType = JdbcType.INTEGER),
+            @Result(column = "credit", property = "credit", jdbcType = JdbcType.INTEGER),
+            @Result(column = "time", property = "time", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "total", property = "total", jdbcType = JdbcType.INTEGER),
+            @Result(column = "selectedN", property = "selectedn", jdbcType = JdbcType.INTEGER),
+            @Result(column = "place", property = "place", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "priviousC", property = "priviousc", jdbcType = JdbcType.INTEGER),
+            @Result(column = "target", property = "target", jdbcType = JdbcType.LONGVARCHAR),
+            @Result(column = "gmt_created", property = "gmtCreated", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "gmt_modified", property = "gmtModified", jdbcType = JdbcType.TIMESTAMP)
     })
-    @ResultMap("dto")
-    List<CourseDTO> selectTeacherCourse(@Param("account") String account);
+    List<CourseDTO> selectStudentCourse(String account);
 }

@@ -22,7 +22,10 @@ p{
 .session_header{
     text-align: center;
 } 
-
+.myLogo{
+    width: 170px;
+    height: auto;
+}
 .container {
     width: 1040px;
     padding: 0px 20px;

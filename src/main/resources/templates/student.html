@@ -4,7 +4,7 @@
 <head>
     <title>选课系统</title>
     <meta http-equiv="Content-Type" content=" text/html" charset="UTF-8"/>
-    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="css/community.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
@@ -42,28 +42,33 @@
                             alt="Responsive image"></a>
                     全部课程</h2>
                 <hr>
-                <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">
-                    <div class="media-body">
-                        <h4 class="media-heading" th:text="${course.courseName}">
-                        </h4>
-                        <strong th:text="'课程代码:'+${course.id}"
-                                class="publish-desc"></strong>
-                        <br>
-                        <span>
-                            <span class="content" th:text="'老师:'+${course.name}"></span>~
-                            <span class="content" th:text="'地点:'+${course.place}"></span>~
-                            <span class="content" th:text="'学时:'+${course.classHour}"></span>~
-                            <span class="content" th:text="'学分:'+${course.credit}"></span>~
+                <div class="alert-warning" th:text="${message}"></div>
+                <div class="myScroller" >
+                    <div class="media" th:if="${courses !=null}" th:each="course: ${courses}">
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${course.courseName}">
+                            </h4>
+                            <strong th:text="'课程代码:'+${course.id}"
+                                    class="publish-desc"></strong>
+                            <br>
+                            <span class="makeItList">
+                             <span class="content" th:text="'地点:'+${course.place}"></span>
+                            <span class="content" th:text="'学时:'+${course.classHour}"></span>
+                            <span class="content" th:text="'学分:'+${course.credit}"></span>
                             <span class="content" th:text="'开课时间:'+
                             ${#dates.format(course.time, 'yyyy-MM-dd HH:mm')}"></span>
-                            <textarea th:text="${course.target}" readonly name="target"
-                                      cols="20"
-                                      rows="1"></textarea>
-                         <a th:href="@{/submit(account=${user.id},course=${course.id})}">
+                            <span class="content" th:text="'先行课节数:'+${course.priviousc}"></span>
+                            <span class="content" th:text="'总人数:'+${course.total}"></span>
+                            <span class="content" th:text="'已选人数:'+${course.selectedn}"></span>
+                            <a class="my-btn"
+                               th:href="@{/submit(account=${user.id},course=${course.id})}">
                              <button type="submit" formmethod="post">选课</button>
                         </a>
+                            <textarea class="content2" th:text="${'学生学号:'+course.target}" readonly
+                                      name="target"
+                                      cols="60" rows="2"></textarea>
                         </span>
-                        <span class="alert-warning" th:text="${message}"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,22 +79,33 @@
                             alt="Responsive image"></a>
                     我的课表</h1>
                 <hr>
-                <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
-                    <div class="media-body">
-                        <h4 class="media-heading" th:text="${mine.courseName}">
-                        </h4>
-                        <strong th:text="'课程代码:'+${mine.id}"
-                                class="publish-desc"></strong><br>
-                        <div>
-                            <span th:text="'老师:'+${mine.name}"></span>~
-                            <span th:text="'地点:'+${mine.place}"></span>~
-                            <span th:text="'学时:'+${mine.classHour}"></span>~
-                            <span th:text="'学分:'+${mine.credit}"></span>~
-                            <span
-                                    th:text="'开课时间:'+${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
-                            <a th:href="@{/quit(account=${user.id},course=${mine.id})}">
-                                <button type="submit" formmethod="post">退选</button>
-                            </a>
+                <div class="myScroller" >
+                    <div class="media" th:if="${mines!=null}" th:each="mine: ${mines}">
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${mine.courseName}">
+                            </h4>
+                            <strong th:text="'课程代码:'+${mine.id}"
+                                    class="publish-desc"></strong><br>
+                            <div class="makeItList">
+                                <span class="content" th:text="'地点:'+${mine.place}"></span>
+                                <span class="content" th:text="'学时:'+${mine.classHour}"></span>
+                                <span class="content" th:text="'学分:'+${mine.credit}"></span>
+                                <span class="content" th:text="'开课时间:'+
+                            ${#dates.format(mine.time, 'yyyy-MM-dd HH:mm')}"></span>
+                                <span class="content" th:text="'先行课节数:'+${mine.priviousc}"></span>
+                                <span class="content" th:text="'总人数:'+${mine.total}"></span>
+                                <span class="content" th:text="'已选人数:'+${mine.selectedn}"></span>
+                                <a class="my-btn"
+                                   th:href="@{/quit(account=${user.id},course=${mine.id})}">
+                                    <button type="submit" formmethod="post">退选</button>
+                                </a>
+                                    <textarea class="content2"  th:text="${'已选的学生:'+mine.target}"
+                                               readonly
+                                               name="target"
+                                               cols="60" rows="2"></textarea>
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
