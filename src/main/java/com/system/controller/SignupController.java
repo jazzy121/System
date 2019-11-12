@@ -45,7 +45,6 @@ public class SignupController {
         }
         student.setPwd(MD5Utils.MD5DnCode(MD5Utils.MD5DnCode(student.getPwd(), "utf8") + SOLT,
                 "utf8"));
-        System.out.println(student.getPwd());
         student.setRole("student");
         //插入
         userMapper.insert(student);
