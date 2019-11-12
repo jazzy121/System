@@ -5,12 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class IndexController {
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index(){
         return "index";
-    }
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
     }
 }
