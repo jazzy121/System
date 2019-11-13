@@ -18,19 +18,21 @@ public class LoginController {
     @Autowired
     private UserMapper userMapper;
 
-    //get请求就访问login页面
     @GetMapping("/")
-    public ModelAndView tologin(@ModelAttribute("account") String account) {
+    public ModelAndView tologin2(@ModelAttribute("account") String account,@ModelAttribute(
+            "role") String role) {
         ModelAndView view = new ModelAndView();
         view.addObject("account", account);
+        view.addObject("role", role);
         view.setViewName("index");
         return view;
     }
 
     //get请求就访问login页面
     @GetMapping("/login")
-    public ModelAndView tologin2(@ModelAttribute("account") String account,@ModelAttribute(
-            "role") String role) {
+    public ModelAndView tologin(@ModelAttribute("account") String account,@ModelAttribute(
+            "role") String role) { //两个ModelAttribute是给页面塞model
+        // 页面可以通过属性名得到其值
         ModelAndView view = new ModelAndView();
         view.addObject("account", account);
         view.addObject("role", role);
@@ -67,6 +69,7 @@ public class LoginController {
         }
         //登录失败
         attributes.addFlashAttribute("account", account);
+        attributes.addFlashAttribute("role", role);
         view.setUrl("/login");
         return view;
     }
