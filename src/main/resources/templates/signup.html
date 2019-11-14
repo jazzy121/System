@@ -28,12 +28,12 @@
                                 <a href="/login">点击登录</a>
                             </span>
                 </header>
-                <form class="session-register_form"
+                <form class="session-register_form" th:object="${student}"
                       action="/signup" accept-charset="UTF-8" id="new_user"
                       method="POST">
                     <p th:text="${message}"></p>
                     <div class="parent">
-                        <input type="text" id="id" name="id" th:value="${id}"
+                        <input type="text" id="id" name="id"  th:field="*{id}"
                                placeholder="学号,例:B18010101"
                                required>
                     </div>
@@ -43,27 +43,27 @@
                                required type="password">
                     </div>
                     <div class="parent">
-                        <input type="text" id="name" name="name" th:value="${name}"
+                        <input type="text" id="name" name="name" th:field="*{name}"
                                placeholder="名字,例:肖程旭"
                                required>
                     </div>
                     <div class="parent">
                         <label for="gender">性别:</label>
-                        <select id="gender" name="gender">
-                            <option value="男">男</option>
-                            <option value="女">女</option>
+                        <select id="gender" name="gender" th:field="*{gender}" >
+                            <option value="male">男</option>
+                            <option value="female">女</option>
                         </select>
                     </div>
                     <div class="parent">
-                        <input type="text" id="depart" name="depart" th:value="${depart}"
+                        <input type="text" id="depart" name="depart" th:field="*{depart}"
                                placeholder="院系,例:计软网安院" required>
                     </div>
                     <div class="parent">
-                        <input type="text" id="major" name="major" th:value="${major}"
+                        <input type="text" id="major" name="major" th:field="*{major}"
                                placeholder="专业,例:软件工程" required>
                     </div>
                     <div class="parent">
-                        <input type="text" id="classname" name="classname" th:value="${classname}"
+                        <input type="text" id="classname" name="classname"  th:field="*{classname}"
                                placeholder="班级,例:B180101" required>
                     </div>
                     <div class="parent remember">
@@ -71,11 +71,11 @@
                         <span>我同意遵守学校规章制度</span>
                     </div>
                     <div class="parent">
-                        <input type="text" id="email" name="email" th:value="${email}"
+                        <input type="text" id="email" name="email" th:field="*{email}"
                                placeholder="选填 邮箱">
                     </div>
                     <div class="parent">
-                        <input type="text" id="mobile" name="mobile" th:value="${mobile}"
+                        <input type="text" id="mobile" name="mobile" th:field="*{mobile}"
                                placeholder="选填 手机号">
                     </div>
                     <button id="btn-submit" class="sub-register" type="submit">立即注册</button>

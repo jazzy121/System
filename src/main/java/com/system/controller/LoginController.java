@@ -70,6 +70,7 @@ public class LoginController {
         //登录失败
         attributes.addFlashAttribute("account", account);
         attributes.addFlashAttribute("role", role);
+        attributes.addFlashAttribute("message", "密码错误!");
         view.setUrl("/login");
         return view;
     }

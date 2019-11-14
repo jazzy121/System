@@ -31,6 +31,7 @@
                 <form class="session-register_form"
                       action="/login" accept-charset="UTF-8" id="new_user"
                       method="POST">
+                    <p th:text="${message}"></p>
                     <div class="parent">
                         <input type="text" id="account" name="account" th:value="${account}"
                                placeholder="account"
